@@ -1,0 +1,74 @@
+$lighter-percentage: 80%;
+$light-percentage: 10%;
+$dark-percentage: 15%;
+$darker-percentage: 35%;
+
+// GENERIC COLORS
+$primary-aquamarine: #000000;
+$secondary-aquamarine: #000000;
+$primary-blue: #000000;
+$secondary-blue: #000000;
+$primary-purple: #000000;
+$secondary-purple: #000000;
+$primary-gray: #000000;//#000000;
+$secondary-gray: #000000;
+$tertiary-gray: #000000;
+$quaternary-gray: #000000;
+$primary-green: #000000;
+$secondary-green: #000000;
+$primary-red: #000000;
+$secondary-red: #000000;
+$primary-white: #000000;
+$secondary-white: #000000;
+$tertiary-white: #000000;
+$quaternary-white: #000000;
+$primary-black: #000000;
+$secondary-black: #000000;
+$tertiary-black: #000000;
+$quaternary-black: #000000;
+$primary-yellow: #000000;
+$secondary-yellow: #000000;
+
+// PALETTE COLORS
+$primary: $primary-green;
+$primary-lighter: lighten($primary, $lighter-percentage);
+$primary-light: lighten($primary, $light-percentage);
+$primary-dark: darken($primary, $dark-percentage);
+$primary-darker: darken($primary, $darker-percentage);
+$secondary: $primary-blue;
+$secondary-lighter: lighten($secondary, $lighter-percentage);
+$secondary-light: lighten($secondary, $light-percentage);
+$secondary-dark: darken($secondary, $dark-percentage);
+$secondary-darker: darken($secondary, $darker-percentage);
+$tertiary: $primary-gray;
+$tertiary-lighter: lighten($tertiary, $lighter-percentage);
+$tertiary-light: lighten($tertiary, $light-percentage);
+$tertiary-dark: darken($tertiary, $dark-percentage);
+$tertiary-darker: darken($tertiary, $darker-percentage);
+$quaternary: $primary-purple;
+$quaternary-lighter: lighten($quaternary, $lighter-percentage);
+$quaternary-light: lighten($quaternary, $light-percentage);
+$quaternary-dark: darken($quaternary, $dark-percentage);
+$quaternary-darker: darken($quaternary, $darker-percentage);
+
+// CASE COLORS
+$info: $primary-blue;
+$info-lighter: lighten($info, $lighter-percentage);
+$info-light: lighten($info, $light-percentage);
+$info-dark: darken($info, $dark-percentage);
+$info-darker: darken($info, $darker-percentage);
+$warning: $primary-yellow;
+$warning-lighter: lighten($warning, $lighter-percentage);
+$warning-light: lighten($warning, $light-percentage);
+$warning-dark: darken($warning, $dark-percentage);
+$warning-darker: darken($warning, $darker-percentage);
+$success: $primary-green;
+$success-lighter: lighten($success, $lighter-percentage);
+$success-light: lighten($success, $light-percentage);
+$success-dark: darken($success, $dark-percentage);
+$success-darker: darken($success, $darker-percentage);
+$danger: $primary-red;
+$danger-lighter: lighten($danger, $lighter-percentage);
+$danger-light: lighten($danger, $light-percentage);
+$danger-dark: darken($danger, $dark-percentage);
+$danger-darker: darken($danger, $darker-percentage);
