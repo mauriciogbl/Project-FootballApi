@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-import Game from './game';
+import Center from './center';
+import Header from './header';
 
 const keyApi = '86aebf1fe1ad42d8b41ad1af52dc8f53';
 
@@ -11,27 +12,35 @@ class App extends React.Component {
     super(props);
     this.state = {
       league: [],
+      team: '',
     };
-    this.renderGame = this.renderGame.bind(this);
     this.eventRequest = this.eventRequest.bind(this);
+    this.getTeamName = this.getTeamName.bind(this);
   };
 
   render() {
-    console.log(this.state.league)
     return (
       <div >
-        <MuiThemeProvider >
+        <MuiThemeProvider>
             <div>
-            <RaisedButton label="Get Info" primary={true} className="application__button" onClick={this.eventRequest} />
-            <Game league={this.state.league} />
+            <Header requestCompetition={this.eventRequest}/>
+            <Center {...this.getCenterProps()} />
             </div>
         </MuiThemeProvider>
       </div>
     );
   }
-    testingObj () {
-        console.dir(objeto)
+    getTeamName(team) {
+        this.setState({ team: team });
     }
+
+    getCenterProps() {
+        return {
+            league: this.state.league,
+            team: this.state.team,
+            getTeamName: this.getTeamName,
+        }
+    };
 
     eventRequest () {
         let xhttp = new XMLHttpRequest();
@@ -45,14 +54,6 @@ class App extends React.Component {
             }
         }.bind(this)
         xhttp.send();
-    }
-
-    renderGame() {
-        return (
-            <div>
-                <p>Hola</p>
-            </div>
-        )
     }
 };
 
