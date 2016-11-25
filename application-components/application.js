@@ -8,59 +8,73 @@ import Header from './header';
 const keyApi = '86aebf1fe1ad42d8b41ad1af52dc8f53';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      league: [],
-      team: '',
-      linkTeam: '',
-      fixtureTeam: {},
-      templateTeam: {},
+    constructor(props) {
+        super(props);
+        this.state = {
+            league: [],
+            leagueName: '',
+            team: '',
+            linkTeam: '',
+            allLeagues: this.eventRequestAllLeagues(),
+        };
+        this.eventRequest = this.eventRequest.bind(this);
+        this.getTeamName = this.getTeamName.bind(this);
     };
-    this.eventRequest = this.eventRequest.bind(this);
-    this.getTeamName = this.getTeamName.bind(this);
-    this.getFixtureTeam = this.getFixtureTeam.bind(this);
-    this.getTemplateTeam = this.getTemplateTeam.bind(this);
-  };
 
-  render() {
-    return (
-      <div >
-        <MuiThemeProvider>
-            <div>
-            <Header requestCompetition={this.eventRequest} team={this.state.team}/>
-            <Center {...this.getCenterProps()} />
+    render() {
+      let component = null
+      if(this.state.allLeagues) {
+          component = <div>
+                          <Header {...this.getHeaderProps()}/>
+                          <Center {...this.getCenterProps()} />
+                      </div>;
+      }
+        return (
+            <div >
+                <MuiThemeProvider>
+                    {component}
+                </MuiThemeProvider>
             </div>
-        </MuiThemeProvider>
-      </div>
-    );
-  }
+        );
+    }
 
     getCenterProps() {
-      return {
-        league: this.state.league,
-        team: this.state.team,
-        linkTeam: this.state.linkTeam,
-        fixtureTeam: this.state.fixtureTeam,
-        templateTeam: this.state.templateTeam,
-        getTeamName: this.getTeamName,
-        getFixtureTeam: this.getFixtureTeam,
-        getTemplateTeam: this.getTemplateTeam,
-      }
+        return {
+            league: this.state.league,
+            team: this.state.team,
+            linkTeam: this.state.linkTeam,
+            getTeamName: this.getTeamName,
+            leagueName: this.state.leagueName,
+        }
     };
 
-    getFixtureTeam(fixture) {
-      this.setState({ fixtureTeam: fixture });
+    getHeaderProps() {
+        return {
+            requestCompetition:this.eventRequest,
+            team:this.state.team,
+            allLeagues:this.state.allLeagues,
+        }
     }
 
     getTeamName(team, linkTeam) {
-      this.setState({ team: team });
-      this.setState({ linkTeam: linkTeam });
+        this.setState({ team: team });
+        this.setState({ linkTeam: linkTeam });
     }
 
+    eventRequestAllLeagues () {
+        let xhttp = new XMLHttpRequest();
+        xhttp.open('GET', 'http://api.football-data.org/v1/competitions/?season=2015', true);
+        xhttp.setRequestHeader("X-Auth-Token", keyApi);
+        xhttp.onreadystatechange = function(event) {
 
-    getTemplateTeam(template) {
-      this.setState({ templateTeam: template });
+            if (xhttp.readyState === XMLHttpRequest.DONE) {
+                let response = JSON.parse(event.target.response);
+                this.setState({
+                    allLeagues: response,
+                 });
+            }
+        }.bind(this)
+        xhttp.send();
     }
 
     eventRequest () {
@@ -71,7 +85,10 @@ class App extends React.Component {
 
             if (xhttp.readyState === XMLHttpRequest.DONE) {
                 let response = JSON.parse(event.target.response);
-                this.setState({ league: response.standing });
+                this.setState({
+                    league: response.standing,
+                    leagueName: response.leagueCaption,
+                 });
             }
         }.bind(this)
         xhttp.send();
