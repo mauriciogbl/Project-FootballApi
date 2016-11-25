@@ -10,9 +10,17 @@ class Header extends React.Component {
     }
 
     render() {
+      let component = null;
+
+      if (this.props.team) {
+        component = <h1 className="header__title">Team Info</h1>
+      }
+      else {
+        component = <RaisedButton label="Get Info" primary={true} className="header__button" onClick={this.handlerClick.bind(this)} />
+      }
         return (
             <div>
-                <RaisedButton label="Get Info" primary={true} className="application__button" onClick={this.handlerClick.bind(this)} />
+                {component}
             </div>
         )
     }

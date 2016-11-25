@@ -1,18 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
-import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
-class Game extends React.Component {
+class Template extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
+    this.state={
       fixedHeader: true,
       fixedFooter: true,
       stripedRows: false,
@@ -23,12 +14,9 @@ class Game extends React.Component {
       deselectOnClickaway: true,
       showCheckboxes: false,
       height: '100%',
-      open: false,
-      team: '',
-    };
+    }
   };
-  
-      render() {
+    render() {
         return (
           <div >
                 <Table
@@ -65,15 +53,15 @@ class Game extends React.Component {
                   showRowHover={this.state.showRowHover}
                   stripedRows={this.state.stripedRows}
                 >
-                  {this.props.league.map( (row, index) => (
+                  {this.props.players.map( (row, index) => (
                     <TableRow key={index} selected={row.selected}>
+                      <TableRowColumn>{row.name}</TableRowColumn>
                       <TableRowColumn>{row.position}</TableRowColumn>
-                      <TableRowColumn>{row.teamName}</TableRowColumn>
-                      <TableRowColumn>{row.points}</TableRowColumn>
-                      <TableRowColumn>{row.playedGames}</TableRowColumn>
-                      <TableRowColumn>{row.wins}</TableRowColumn>
-                      <TableRowColumn>{row.draws}</TableRowColumn>
-                      <TableRowColumn>{row.losses}</TableRowColumn>
+                      <TableRowColumn>{row.jerseyNumber}</TableRowColumn>
+                      <TableRowColumn>{row.dateOfBirth}</TableRowColumn>
+                      <TableRowColumn>{row.nationality}</TableRowColumn>
+                      <TableRowColumn>{row.contractUntil}</TableRowColumn>
+                      <TableRowColumn>{row.marketValue}</TableRowColumn>
                     </TableRow>
                     ))}
                 </TableBody>
@@ -82,12 +70,5 @@ class Game extends React.Component {
           </div>
         );
     };
-  _onCellClick(rowNumber, columnNumber, evt) {
-      console.log("Team: ", this.props.league[rowNumber].teamName, "saved");
-      console.log(this.props.league[rowNumber]._links.team.href);
-      console.dir(this.props.league[rowNumber]);
-      this.props.getTeamName(this.props.league[rowNumber].teamName, this.props.league[rowNumber]._links.team.href);
-  };
-};
-
-export default Game
+}
+export default Template

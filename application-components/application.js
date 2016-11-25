@@ -13,9 +13,14 @@ class App extends React.Component {
     this.state = {
       league: [],
       team: '',
+      linkTeam: '',
+      fixtureTeam: {},
+      templateTeam: {},
     };
     this.eventRequest = this.eventRequest.bind(this);
     this.getTeamName = this.getTeamName.bind(this);
+    this.getFixtureTeam = this.getFixtureTeam.bind(this);
+    this.getTemplateTeam = this.getTemplateTeam.bind(this);
   };
 
   render() {
@@ -23,24 +28,40 @@ class App extends React.Component {
       <div >
         <MuiThemeProvider>
             <div>
-            <Header requestCompetition={this.eventRequest}/>
+            <Header requestCompetition={this.eventRequest} team={this.state.team}/>
             <Center {...this.getCenterProps()} />
             </div>
         </MuiThemeProvider>
       </div>
     );
   }
-    getTeamName(team) {
-        this.setState({ team: team });
-    }
 
     getCenterProps() {
-        return {
-            league: this.state.league,
-            team: this.state.team,
-            getTeamName: this.getTeamName,
-        }
+      return {
+        league: this.state.league,
+        team: this.state.team,
+        linkTeam: this.state.linkTeam,
+        fixtureTeam: this.state.fixtureTeam,
+        templateTeam: this.state.templateTeam,
+        getTeamName: this.getTeamName,
+        getFixtureTeam: this.getFixtureTeam,
+        getTemplateTeam: this.getTemplateTeam,
+      }
     };
+
+    getFixtureTeam(fixture) {
+      this.setState({ fixtureTeam: fixture });
+    }
+
+    getTeamName(team, linkTeam) {
+      this.setState({ team: team });
+      this.setState({ linkTeam: linkTeam });
+    }
+
+
+    getTemplateTeam(template) {
+      this.setState({ templateTeam: template });
+    }
 
     eventRequest () {
         let xhttp = new XMLHttpRequest();
